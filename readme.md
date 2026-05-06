@@ -20,28 +20,20 @@ This project demonstrates a defensive pipeline for detecting Go-based ransomware
    ```
 
 ## Usage
-1. **Dynamic Monitoring**:
-   Open a terminal and start the monitor from `scripts/python`:
-   ```bash
-   cd scripts/python
-   python dynamic_monitor.py
-   ```
+Step 1: Baseline Testing (Normal Activity)
+Open your monitor in one terminal and run the baseline script in another:
+uv run create_normal_file.py
+Expected Result: Monitor detects the file with low entropy and triggers no alert.
 
-2. **Execute Simulation**:
-   Open a separate terminal and run the simulator from `scripts/go`:
-   ```bash
-   cd scripts/go
-   ./simulator.exe
-   ```
+Step 2: Attack Simulation (High Entropy)
+Execute the Go simulator to trigger the concurrent encryption loop:
+./simulator.exe
+Expected Result: Monitor detects multiple files with entropy near 8.0 and triggers critical alerts.
 
-   The simulator now writes encrypted files into the repository root `victim_files/` directory, which is the same location monitored by `dynamic_monitor.py`.
-
-3. **Static Analysis**:
-   From `scripts/python`, analyze the compiled binary to inspect Go runtime section artifacts:
-   ```bash
-   cd scripts/python
-   python static_analyzer.py ../go/simulator.exe
-   ```
+Step 3: Language Identification (Static Analysis)
+Analyze the binary to identify the Go runtime:
+uv run static_analyzer.py ../go/simulator.exe
+Expected Result: Script identifies the .gopclntab section header despite the binary being stripped.
 
 ## Configuration
 Adjust `scripts/python/config.json` to change the monitored directory or the entropy detection threshold.
