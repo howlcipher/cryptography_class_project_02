@@ -1,5 +1,5 @@
 {
-    "monitor_dir": "../../victim_files",
+    "monitor_dir": "../go/victim_files",
     "entropy_threshold": 7.95,
     "log_level": "INFO"
 }
