@@ -1,0 +1,5 @@
+{
+    "monitor_dir": "../../victim_files",
+    "entropy_threshold": 7.95,
+    "log_level": "INFO"
+}
