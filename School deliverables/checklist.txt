@@ -1,0 +1,5 @@
+1. Final Project Report,.docx or .pdf,Ready to Draft
+2. Code Archive,.zip and/or repo,Ready to Bundle
+3. README Guide,.md or .pdf,Ready to Finalize
+4. Video Demo,.mp4 or .mov,Ready to Record
+5. Execution Logs,.txt,Optional / Backup
