@@ -1,25 +1,31 @@
-Introduction (Start Recording)
+ntroduction (Start Recording)
 
-    "Hello Professor Jenkins. This is William Elias. This is my demonstration for the INFA 723 project focusing on Python based detection for Go ransomware environments. I will show how we can use entropy math and static analysis to identify malicious Go payloads."
+    "Hello Professor Jenkins. This is William Elias. This is my demonstration for the INFA 723 project focusing on Python based detection for Go ransomware environments. I will show how we can use entropy math and static analysis to identify malicious Go payloads and generate verifiable execution logs."
 
 Scenario 1: Normal Activity (The Baseline)
 
     Action: In the Right Terminal, run uv run dynamic_monitor.py. In the Left Terminal, run uv run create_normal_file.py.
 
-    "I am starting my dynamic monitor in the right terminal. Now, I will run a Python script to create a standard text document in my victim directory. [Visual Cue: Point to the monitor output] Notice the monitor detects 'normal.txt' and reports an entropy score of 4.1. Because this data is predictable and falls well below our 7.95 threshold, no alert is triggered. This proves the tool understands the difference between standard work and encryption."
+    "I am starting my dynamic monitor in the right terminal. Now, I will run a Python script to create a standard text document in my victim directory. [Visual Cue: Point to the monitor output] Notice the monitor detects 'normal.txt' and reports an entropy score of 4.1. Because this data falls well below our 7.95 threshold, no alert is triggered."
 
 Scenario 2: The Attack (High Entropy)
 
     Action: In the Left Terminal, run ./simulator.exe. Watch the Right Terminal populate with alerts.
 
-    "Now I am executing the Go simulator. This binary is abusing goroutines to write one hundred files simultaneously. [Visual Cue: Highlight the scrolling alerts] Look at the monitor on the right. The entropy scores are now hitting 7.99 and 8.00. This is the mathematical signature of absolute randomness, which characterizes encrypted payloads. My script has identified this as a critical event, as seen in the red 'CRITICAL ALERT' labels appearing for every file."
+    "Now I am executing the Go simulator. This binary is abusing goroutines to write one hundred files simultaneously. [Visual Cue: Highlight the scrolling alerts] Look at the monitor on the right. The entropy scores are hitting 7.99 and 8.00. This is the mathematical signature of absolute randomness. My script has identified this as a critical event, as seen in the 'CRITICAL ALERT' labels appearing for every file."
 
 Scenario 3: Static Analysis (Unmasking the Binary)
 
     Action: Stop the monitor in the Right Terminal (Ctrl+C). Run uv run static_analyzer.py ../go/simulator.exe.
 
-    "Even though this binary was stripped during compilation to hide its tracks, we can still identify the source. I am running the static analyzer now. [Visual Cue: Point to the 'Section Found' list] By parsing the portable executable headers, my script located the '.gopclntab' section. Even without standard symbols, this specific runtime structure confirms the binary was built with Go, providing a vital lead for incident response."
+    "Even though this binary was stripped during compilation, we can still identify the source. I am running the static analyzer now. [Visual Cue: Point to the '.gopclntab' line] By parsing the executable headers, my script located the hidden Go runtime sections. This confirms the language used to build the malware, providing a vital lead for incident response."
+
+Scenario 4: Log Verification (The Audit Trail)
+
+    Action: Open the logs/execution_results.txt file (or use cat / type to show it in the terminal).
+
+    "Finally, I am verifying my execution logs. [Visual Cue: Scroll through the log file] Here we see the full audit trail of the session, including the baseline check, the high entropy alerts, and the static analysis results. These logs provide the forensic evidence needed for post incident review."
 
 Conclusion (Stop Recording)
 
-    "By combining behavioral entropy checks with static header analysis, we can identify these aggressive Go payloads even when they use modern evasion techniques. This concludes my demonstration. Thank you."
+    "By combining behavioral entropy checks with static header analysis and proper logging, we can identify and document these aggressive Go payloads. This concludes my demonstration. Thank you."
