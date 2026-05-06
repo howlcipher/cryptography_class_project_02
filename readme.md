@@ -11,7 +11,7 @@ This project demonstrates a defensive pipeline for detecting Go-based ransomware
 ## Setup
 1. **Python Dependencies**:
    ```bash
-   pip install -r requirements.txt
+   pip install pefile scipy numpy
    ```
 2. **Compile Go Simulator**:
    ```bash

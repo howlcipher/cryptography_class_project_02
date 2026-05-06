@@ -219,3 +219,6 @@ __marimo__/
 
 # go build files
 *.exe
+
+# victim files
+*.locked

@@ -11,7 +11,7 @@ import (
 
 func generateEncryptedFile(filePath string, wg *sync.WaitGroup) {
 	defer wg.Done()
-	
+
 	// Create a 1MB file of pure pseudorandom data to simulate encryption
 	data := make([]byte, 1024*1024)
 	_, err := rand.Read(data)
@@ -27,7 +27,7 @@ func generateEncryptedFile(filePath string, wg *sync.WaitGroup) {
 }
 
 func main() {
-	targetDir := "./victim_files"
+	targetDir := filepath.Join("..", "victim_files")
 	os.MkdirAll(targetDir, os.ModePerm)
 
 	fmt.Println("Initiating concurrent encryption simulation...")
