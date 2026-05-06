@@ -223,3 +223,8 @@ __marimo__/
 # victim files
 *.locked
 normal.txt
+
+# video files
+*.mp4
+*.mkv
+*.avi
