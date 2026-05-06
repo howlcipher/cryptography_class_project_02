@@ -6,19 +6,19 @@ Scenario 1: Normal Activity (The Baseline)
 
     Action: In the Right Terminal, run uv run dynamic_monitor.py. In the Left Terminal, run uv run create_normal_file.py.
 
-    "I am starting my dynamic monitor in the right terminal. Now, I will run a Python script to create a standard text document in my victim directory. Notice the monitor detects the file but reports a low entropy score around 4.0. Because this data is predictable and not random, no alert is triggered. This proves the tool understands the difference between standard work and encryption."
+    "I am starting my dynamic monitor in the right terminal. Now, I will run a Python script to create a standard text document in my victim directory. [Visual Cue: Point to the monitor output] Notice the monitor detects 'normal.txt' and reports an entropy score of 4.1. Because this data is predictable and falls well below our 7.95 threshold, no alert is triggered. This proves the tool understands the difference between standard work and encryption."
 
 Scenario 2: The Attack (High Entropy)
 
     Action: In the Left Terminal, run ./simulator.exe. Watch the Right Terminal populate with alerts.
 
-    "Now I am executing the Go simulator. This binary is abusing goroutines to write one hundred files simultaneously. Look at the monitor on the right. It is catching these files instantly. The entropy scores are hitting 7.99 and 8.00, which is the absolute maximum for randomness. My script has identified this as a critical event and triggered an alert for every single file."
+    "Now I am executing the Go simulator. This binary is abusing goroutines to write one hundred files simultaneously. [Visual Cue: Highlight the scrolling alerts] Look at the monitor on the right. The entropy scores are now hitting 7.99 and 8.00. This is the mathematical signature of absolute randomness, which characterizes encrypted payloads. My script has identified this as a critical event, as seen in the red 'CRITICAL ALERT' labels appearing for every file."
 
 Scenario 3: Static Analysis (Unmasking the Binary)
 
     Action: Stop the monitor in the Right Terminal (Ctrl+C). Run uv run static_analyzer.py ../go/simulator.exe.
 
-    "Even though this binary was stripped during compilation to hide its tracks, we can still identify the source. I am running the static analyzer now. By parsing the portable executable headers, my script located the hidden Go runtime sections. This confirms the language used to build the malware, which is vital for incident response."
+    "Even though this binary was stripped during compilation to hide its tracks, we can still identify the source. I am running the static analyzer now. [Visual Cue: Point to the 'Section Found' list] By parsing the portable executable headers, my script located the '.gopclntab' section. Even without standard symbols, this specific runtime structure confirms the binary was built with Go, providing a vital lead for incident response."
 
 Conclusion (Stop Recording)
 
