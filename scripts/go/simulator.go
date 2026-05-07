@@ -9,6 +9,9 @@ import (
 	"time"
 )
 
+// generateEncryptedFile simulates the creation of an encrypted file by generating
+// 1MB of pseudorandom data and writing it to the specified file path.
+// This function is run concurrently for each file.
 func generateEncryptedFile(filePath string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
@@ -27,6 +30,7 @@ func generateEncryptedFile(filePath string, wg *sync.WaitGroup) {
 }
 
 func main() {
+	// Define the target directory for victim files relative to the script location
 	targetDir := filepath.Join("..", "victim_files")
 	os.MkdirAll(targetDir, os.ModePerm)
 

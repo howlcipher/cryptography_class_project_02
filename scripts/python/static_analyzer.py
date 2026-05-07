@@ -3,6 +3,10 @@ import sys
 import os
 
 def analyze_binary(file_path):
+    """
+    Analyze a PE (Portable Executable) binary file for signs of Go compilation.
+    Looks for specific sections that are characteristic of Go binaries.
+    """
     if not os.path.exists(file_path):
         print(f"Error: File {file_path} not found.")
         return
@@ -15,6 +19,7 @@ def analyze_binary(file_path):
         for section in pe.sections:
             section_name = section.Name.decode('utf-8', errors='ignore').strip('\x00')
             print(f"Section Found: {section_name}")
+            # Check for Go-specific sections
             if ".gopclntab" in section_name or ".data" in section_name:
                 go_artifact_found = True
                 

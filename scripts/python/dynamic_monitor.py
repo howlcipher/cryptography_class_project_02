@@ -13,6 +13,11 @@ MONITOR_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), config["mo
 ENTROPY_THRESHOLD = config["entropy_threshold"]
 
 def calculate_shannon_entropy(file_path):
+    """
+    Calculate the Shannon entropy of a file based on byte frequencies.
+    Entropy measures the randomness or unpredictability of the data.
+    High entropy indicates potentially encrypted or compressed data.
+    """
     try:
         with open(file_path, 'rb') as f:
             byte_arr = list(f.read())
@@ -31,6 +36,11 @@ def calculate_shannon_entropy(file_path):
         return 0.0
 
 def monitor_directory():
+    """
+    Continuously monitor the specified directory for new files.
+    For each new file, calculate its entropy and alert if it exceeds the threshold.
+    This simulates real-time detection of ransomware encryption activities.
+    """
     print(f"Monitoring directory: {MONITOR_DIR}")
     seen_files = set(os.listdir(MONITOR_DIR)) if os.path.exists(MONITOR_DIR) else set()
     

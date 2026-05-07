@@ -1,21 +1,22 @@
 import os
 import json
 
-# Load configuration to get the correct path
+# Load configuration file
 config_path = os.path.join(os.path.dirname(__file__), "config.json")
 with open(config_path, "r") as f:
     config = json.load(f)
 
-# Resolve the absolute path to the victim directory
+# Resolve victim directory path
 VICTIM_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), config["monitor_dir"]))
 
 def create_baseline_file():
+    # Create the victim directory if needed
     if not os.path.exists(VICTIM_DIR):
         os.makedirs(VICTIM_DIR)
         
     file_path = os.path.join(VICTIM_DIR, "normal.txt")
     
-    # Standard, low-entropy text content
+    # Normal low-entropy content for comparison
     content = (
         "This is a standard baseline document for the cryptography project. "
         "It contains normal English prose with predictable patterns and low randomness. "
@@ -30,4 +31,5 @@ def create_baseline_file():
         print(f"Error creating file: {e}")
 
 if __name__ == "__main__":
+    # Run when executed directly
     create_baseline_file()
