@@ -1,0 +1,13 @@
+For my final project I developed a defensive pipeline using Python to detect and analyze ransomware payloads written in the Go programming language. Threat actors are increasingly utilizing Go because its native concurrency model specifically the use of goroutines allows them to encrypt massive file systems simultaneously overwhelming standard endpoint protections (Mandiant, 2023). Furthermore these binaries are statically linked making traditional signature based detection highly ineffective especially when the attacker strips the debugging symbols.
+
+To combat this evasion my project demonstrates two distinct detection methodologies. First I built a dynamic behavioral monitor that calculates the Shannon entropy of file modifications in real time using the SciPy library (Shannon, 1948). Because encrypted data mathematically resembles pure randomness the monitor triggers a critical alert when file modifications approach the maximum randomness threshold of eight point zero thereby catching the encryption loop in action. Second I developed a static analyzer using the PEfile module to parse portable executable headers (Carrera, 2024). Even when a binary is stripped it must retain the Program Counter Line Number Table for the Go runtime to function. My script successfully locates this hidden structure confirming the language of the payload.
+
+Working as a production support engineer highlights how critical automated behavioral analysis is for enterprise environments. This project proves that by focusing on immutable mathematical realities and unchangeable structural requirements defenders can reliably unmask advanced extortion tools before catastrophic data loss occurs.
+
+References
+
+Carrera, E. (2024). pefile: A Python module to read and work with Portable Executable files [Software]. GitHub.
+
+Mandiant. (2023). Golang internals and symbol recovery. Google Cloud.
+
+Shannon, C. E. (1948). A mathematical theory of communication. The Bell System Technical Journal, 27(3), 379 to 423.
